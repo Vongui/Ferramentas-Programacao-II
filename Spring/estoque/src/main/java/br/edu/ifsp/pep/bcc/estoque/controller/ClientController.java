@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,10 +66,12 @@ public class ClientController {
     @PostMapping(value = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Client createClient(@RequestBody Client entity){
-
+    public ResponseEntity<Client> createClient(@RequestBody Client entity){
         clientRepository.save(entity);
-        return entity;
+        URI uriAddress = UriComponentsBuilder.fromPath("/client/{codigo}").
+                buildAndExpand(entity.getCodigo()).toUri(); // cria o caminho
+        
+        return ResponseEntity.created(uriAddress).body(entity);
     }
 
     @DeleteMapping(value = "/{codigo}",
