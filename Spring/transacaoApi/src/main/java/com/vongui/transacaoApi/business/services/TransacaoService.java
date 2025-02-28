@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +18,7 @@ public class TransacaoService {
 
     public void adicionaTransacao(TransacaoRequestDTO transacaoRequestDTO) {
 
-        log.info("Iniciando a gravação de Transações");
+        log.info("Iniciando a gravação de Transações" + transacaoRequestDTO);
         if (transacaoRequestDTO.dataHora().isAfter(OffsetDateTime.now())) {
             log.error("Data/Hora maiores que a Data/Hora atual");
             throw new UnprocessableEntity("");
@@ -28,15 +26,20 @@ public class TransacaoService {
             log.error("Valor menor que zero");
             throw new UnprocessableEntity("");
         }
+        log.info("Transacão adicionada com sucesso");
         listaTransacoes.add(transacaoRequestDTO);
     }
 
     public void deletaTransacao() {
+        log.info("Iniciando processamento de apagar transacoes");
         listaTransacoes.clear();
+        log.info("Transacões deletadas com sucesso");
     }
 
-    public List<TransacaoRequestDTO> buscarTransacoesPorDataHora(Integer intervalo) {
+    public List<TransacaoRequestDTO> buscarTransacoesPorIntervalo(Integer intervalo) {
+        log.info("Iniciando processamento de busca de transacoes");
         OffsetDateTime dataHoraIntervalo = OffsetDateTime.now().minusSeconds(intervalo);
+        log.info("Retorno de transacoes com sucesso");
         return listaTransacoes.stream().filter(transacao -> transacao.dataHora().isAfter(dataHoraIntervalo)).toList();
     }
 
