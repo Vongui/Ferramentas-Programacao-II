@@ -37,7 +37,7 @@ public class TransacaoController {
             @ApiResponse(responseCode = "400", description = "Erro de requisição"),
             @ApiResponse(responseCode = "500", description = "Erro interno")
     })
-    public ResponseEntity<Void> removerTransacao(@RequestBody TransacaoRequestDTO transacaoRequestDTO){
+    public ResponseEntity<Void> removerTransacao(){
         transacaoService.deletaTransacao();
         return ResponseEntity.status(HttpStatus.OK).build();
     }
