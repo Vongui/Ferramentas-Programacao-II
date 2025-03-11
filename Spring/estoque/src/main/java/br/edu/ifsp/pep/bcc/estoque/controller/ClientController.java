@@ -1,8 +1,12 @@
 package br.edu.ifsp.pep.bcc.estoque.controller;
 
+import br.edu.ifsp.pep.bcc.estoque.controller.dto.ClientDTO;
+import br.edu.ifsp.pep.bcc.estoque.controller.dto.ClientResponseDTO;
 import br.edu.ifsp.pep.bcc.estoque.model.entities.Client;
 import br.edu.ifsp.pep.bcc.estoque.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -62,11 +66,11 @@ public class ClientController {
     @PostMapping(value = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Client> createClient(@RequestBody Client entity){
-        clientService.create(entity);
-        URI uriAddress = UriComponentsBuilder.fromPath("/client/{codigo}").
-                buildAndExpand(entity.getCodigo()).toUri();
-        return ResponseEntity.created(uriAddress).body(entity);
+    public ResponseEntity<ClientResponseDTO> createClient(@RequestBody ClientDTO entity) throws Exception {
+        Client client = clientService.create(entity.tranformaParaObjeto());
+        //URI uriAddress = UriComponentsBuilder.fromPath("/client/{codigo}").
+                //buildAndExpand(entity.tranformaParaObjeto().getCodigo()).toUri();
+        return ResponseEntity.status(HttpStatus.CREATED).body(ClientResponseDTO.transformaEmDto(client));
     }
 
     @DeleteMapping(value = "/{codigo}",
