@@ -8,14 +8,23 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Objects.nonNull;
+
 @Service
 public class ClientService {
 
     @Autowired
     ClientRepository clientRepository;
 
-    public Client create(Client client){
-        return clientRepository.save(client);
+    public Client create(Client client) throws Exception {
+        try {
+            if ( nonNull(clientRepository.findOneByEmail(client.getEmail()))){
+                throw new Exception("Email já pertence a outro usuário!!");
+            }
+            return clientRepository.save(client);
+        }catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
     }
 
     public boolean alterStatus(int codigo, int status){
