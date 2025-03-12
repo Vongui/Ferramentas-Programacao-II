@@ -2,6 +2,7 @@ package br.edu.ifsp.pep.bcc.estoque.service;
 
 import br.edu.ifsp.pep.bcc.estoque.model.entities.Client;
 import br.edu.ifsp.pep.bcc.estoque.repository.ClientRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,16 +11,19 @@ import java.util.Optional;
 
 import static java.util.Objects.nonNull;
 
+@RequiredArgsConstructor
 @Service
 public class ClientService {
 
-    @Autowired
-    ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
 
     public Client create(Client client) throws Exception {
         try {
             if ( nonNull(clientRepository.findOneByEmail(client.getEmail()))){
                 throw new Exception("Email já pertence a outro usuário!!");
+            }
+            if ( nonNull(clientRepository.findOneByTelefone(client.getTelefone()))){
+                throw new Exception("Telefone já pertence a outro usuário!!");
             }
             return clientRepository.save(client);
         }catch (Exception ex) {
