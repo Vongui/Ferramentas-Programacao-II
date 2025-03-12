@@ -4,6 +4,9 @@ import br.edu.ifsp.pep.bcc.estoque.controller.dto.ClientDTO;
 import br.edu.ifsp.pep.bcc.estoque.controller.dto.ClientResponseDTO;
 import br.edu.ifsp.pep.bcc.estoque.model.entities.Client;
 import br.edu.ifsp.pep.bcc.estoque.service.ClientService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -18,6 +21,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("client")
+@Slf4j
+@RequiredArgsConstructor
 public class ClientController {
 
     //@PathVariable: Para capturar valores diretamente do caminho da URL.
@@ -31,8 +36,8 @@ public class ClientController {
     PATCH -> Query Params, Path Params, Body, altera somente o atributo da entidade
     */
 
-    @Autowired
-    ClientService clientService;
+
+    private final ClientService clientService;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Client>> getAll(){
@@ -66,11 +71,19 @@ public class ClientController {
     @PostMapping(value = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ClientResponseDTO> createClient(@RequestBody ClientDTO entity) throws Exception {
-        Client client = clientService.create(entity.tranformaParaObjeto());
+    public ResponseEntity createClient(@Valid @RequestBody ClientDTO entity) throws Exception {
+        log.debug("Criando um novo cliente...");
+        try{
+            Client client = clientService.create(entity.tranformaParaObjeto());
+            log.info("Cliente criado com sucesso!");
+            return ResponseEntity.status(HttpStatus.CREATED).body(ClientResponseDTO.transformaEmDto(client));
+        }catch (Exception e){
+            log.debug("Erro ao criar um novo cliente");
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
         //URI uriAddress = UriComponentsBuilder.fromPath("/client/{codigo}").
-                //buildAndExpand(entity.tranformaParaObjeto().getCodigo()).toUri();
-        return ResponseEntity.status(HttpStatus.CREATED).body(ClientResponseDTO.transformaEmDto(client));
+                //buildAndExpand(entity.tranformaParaObjeto().getCodigo()).toUri()
     }
 
     @DeleteMapping(value = "/{codigo}",
