@@ -1,7 +1,10 @@
 package br.edu.ifsp.pep.bcc.estoque.model.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
@@ -20,16 +23,21 @@ public class Client {
     @EqualsAndHashCode.Include // incluindo o atributo no equals and hashCode
     private int codigo;
 
-    //@NotBlank
+    @NotBlank(message = "O nome não pode ser vazio!")
+    @Size(min = 3, max = 60, message = "O nome precisar ser entre 3 a 60 caracteres")
     @Column(name = "nome", length = 60, nullable = false)
     private String nome;
 
+    @NotBlank(message = "Email não pode ser vazio")
+    @Email(message = "Email inválido!!")
     @Column(name = "email", length = 30 ,nullable = false)
     private String email;
 
+    @NotBlank(message = "Telefone não pode ser vazio!!")
     @Column(name = "telefone", length = 15, nullable = false)
     private String telefone;
 
+    @Positive
     @Column(name = "ativo")
     private int ativo;
 
