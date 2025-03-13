@@ -1,10 +1,7 @@
 package br.edu.ifsp.pep.bcc.estoque.model.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
@@ -29,11 +26,13 @@ public class Client {
     private String nome;
 
     @NotBlank(message = "Email não pode ser vazio")
+    @NotNull
     @Email(message = "Email inválido!!")
     @Column(name = "email", length = 30 ,nullable = false)
     private String email;
 
     @NotBlank(message = "Telefone não pode ser vazio!!")
+    @NotNull
     @Column(name = "telefone", length = 15, nullable = false)
     private String telefone;
 
