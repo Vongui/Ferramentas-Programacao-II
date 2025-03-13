@@ -32,6 +32,8 @@ public class Client {
     private String email;
 
     @NotBlank(message = "Telefone não pode ser vazio!!")
+    @Pattern(regexp = "(\\(\\d{2}\\)\\s)(\\d{4,5}\\-\\d{4})",
+                message = "O padrão para telefone está incorreto, utilize (XX) XXXXX-XXXX")
     @NotNull
     @Column(name = "telefone", length = 15, nullable = false)
     private String telefone;
