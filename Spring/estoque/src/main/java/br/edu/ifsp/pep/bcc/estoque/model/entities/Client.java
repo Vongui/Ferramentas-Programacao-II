@@ -45,5 +45,6 @@ public class Client {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+        this.ativo = 1;
     }
 }
