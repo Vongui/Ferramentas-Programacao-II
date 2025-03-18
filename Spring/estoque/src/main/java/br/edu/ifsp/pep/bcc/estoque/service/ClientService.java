@@ -1,9 +1,9 @@
 package br.edu.ifsp.pep.bcc.estoque.service;
 
+import br.edu.ifsp.pep.bcc.estoque.controller.exception.NotFoundException;
 import br.edu.ifsp.pep.bcc.estoque.model.entities.Client;
 import br.edu.ifsp.pep.bcc.estoque.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -76,15 +76,12 @@ public class ClientService {
     }
 
     public Client updateClient(int codigo, Client client){
-        Optional<Client> optionalClient = clientRepository.findById(client.getCodigo());
+        Client optionalClient = clientRepository.findById(client.getCodigo()).
+                orElseThrow(() -> new NotFoundException("Cliente não encontrado!!"));
 
-        if (optionalClient.isPresent()){
-            client.setCodigo(codigo);
-            Client clientAlter = clientRepository.save(client);
-            return clientAlter;
-        }
-
-        return null;
+        client.setCodigo(codigo);
+        Client clientAlter = clientRepository.save(client);
+        return clientAlter;
     }
 
 }

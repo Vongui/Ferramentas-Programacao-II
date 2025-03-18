@@ -7,6 +7,8 @@ import br.edu.ifsp.pep.bcc.estoque.service.ClientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.record.RecordModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -100,13 +102,14 @@ public class ClientController {
                 consumes = MediaType.APPLICATION_JSON_VALUE,
                 produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<Client> updateClient(@PathVariable int codigo, @RequestBody Client client){
+    public ResponseEntity<Client> updateClient(@PathVariable int codigo, @RequestBody ClientDTO dto) {
+        ModelMapper mapper = new ModelMapper().registerModule(new RecordModule());
+        Client client = mapper.map(dto, Client.class);
+
         Client clientAlter = clientService.updateClient(codigo, client);
-        if (clientAlter != null){
-            return ResponseEntity.ok(clientAlter);
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(clientAlter);
     }
+
     @PatchMapping(value = "/{codigo}/ativar")
     public ResponseEntity<String> activateClient(@PathVariable int codigo){
         if(clientService.alterStatus(codigo, 1)){
