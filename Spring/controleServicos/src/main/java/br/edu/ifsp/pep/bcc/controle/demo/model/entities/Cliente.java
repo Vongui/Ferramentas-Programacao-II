@@ -40,12 +40,14 @@ public class Cliente {
 
     @Positive
     @Column(name = "ativo")
+    @NotNull
     private int ativo;
 
     public Cliente(String nome, String email, String telefone) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+        this.ativo = 1;
     }
 
 }
