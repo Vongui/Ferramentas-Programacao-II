@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Entity
 @Getter
 @Setter
@@ -13,10 +15,11 @@ import lombok.*;
 
 @Table(name = "item_ordem_servico")
 @IdClass(ItemOrdemServicoId.class)
-public class ItemOrdemServico {
+public class ItemOrdemServico implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
+    @ManyToOne
     @JoinColumn(name = "numero", referencedColumnName = "numero")
     private OrdemServico ordemServico;
 
