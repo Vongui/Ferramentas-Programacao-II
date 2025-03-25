@@ -1,14 +1,14 @@
 package br.edu.ifsp.pep.bcc.controle.demo.controller;
 
 import br.edu.ifsp.pep.bcc.controle.demo.controller.dto.ClienteDTO;
+import br.edu.ifsp.pep.bcc.controle.demo.controller.dto.ClienteMapper;
 import br.edu.ifsp.pep.bcc.controle.demo.controller.dto.ClienteResponseDTO;
 import br.edu.ifsp.pep.bcc.controle.demo.model.entities.Cliente;
 import br.edu.ifsp.pep.bcc.controle.demo.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.record.RecordModule;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +23,7 @@ import java.util.List;
 public class ClienteController {
 
     private final ClienteService clientService;
+    private final ClienteMapper clienteMapper;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Cliente>> getAll(){
@@ -56,21 +57,11 @@ public class ClienteController {
     @PostMapping(value = "",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createClient(@Valid @RequestBody ClienteDTO entity) throws Exception {
-        log.debug("Criando um novo cliente...");
-        ModelMapper mapper = new ModelMapper().registerModule(new RecordModule());
-        Cliente clientMapperDTO = mapper.map(entity, Cliente.class);
-
-        try{
-            Cliente client = clientService.create(clientMapperDTO);
+    public ResponseEntity<ClienteResponseDTO> createClient(@Valid @RequestBody ClienteDTO dto) throws Exception {
+            log.debug("Criando um novo cliente...");
+            Cliente client = clientService.create(clienteMapper.clientDtoTOClient(dto));
             log.info("Cliente criado com sucesso!");
-            mapper = new ModelMapper().registerModule(new RecordModule());
-            ClienteResponseDTO responseDTO = mapper.map(client, ClienteResponseDTO.class);
-            return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
-        }catch (Exception e){
-            log.debug("Erro ao criar um novo cliente");
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+            return ResponseEntity.status(HttpStatus.CREATED).body(clienteMapper.clientToClientResponseDTO(client));
     }
 
     @DeleteMapping(value = "/{codigo}",
@@ -88,10 +79,8 @@ public class ClienteController {
             produces = MediaType.APPLICATION_JSON_VALUE)
 
     public ResponseEntity<Cliente> updateClient(@PathVariable int codigo, @RequestBody ClienteDTO dto) {
-        ModelMapper mapper = new ModelMapper().registerModule(new RecordModule());
-        Cliente client = mapper.map(dto, Cliente.class);
 
-        Cliente clientAlter = clientService.updateClient(codigo, client);
+        Cliente clientAlter = clientService.updateClient(codigo, clienteMapper.clientDtoTOClient(dto));
         return ResponseEntity.ok(clientAlter);
     }
 

@@ -38,7 +38,7 @@ public class Cliente {
     @Column(name = "telefone", length = 16, nullable = false)
     private String telefone;
 
-    @Positive
+//    @Positive
     @Column(name = "ativo")
     @NotNull
     private int ativo;

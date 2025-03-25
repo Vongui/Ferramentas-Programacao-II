@@ -1,6 +1,5 @@
 package br.edu.ifsp.pep.bcc.controle.demo.model.entities;
 
-import jakarta.persistence.Embeddable;
 import lombok.*;
 
 import java.io.Serializable;
