@@ -80,8 +80,7 @@ public class ClienteService {
                 orElseThrow(() -> new NotFoundException("Cliente não encontrado!!"));
 
         client.setCodigo(codigo);
-        Cliente clientAlter = clienteRepository.save(client);
-        return clientAlter;
+        return clienteRepository.save(client);
     }
 
 }
