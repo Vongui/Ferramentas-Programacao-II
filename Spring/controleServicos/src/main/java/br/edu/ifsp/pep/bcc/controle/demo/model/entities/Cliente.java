@@ -28,7 +28,7 @@ public class Cliente {
     @NotBlank(message = "Email não pode ser vazio")
     @NotNull
     @Email(message = "Email inválido!!")
-    @Column(name = "email", length = 100 ,nullable = false)
+    @Column(name = "email", length = 100, nullable = false)
     private String email;
 
     @NotBlank(message = "Telefone não pode ser vazio!!")
@@ -38,16 +38,14 @@ public class Cliente {
     @Column(name = "telefone", length = 16, nullable = false)
     private String telefone;
 
-//    @Positive
     @Column(name = "ativo")
     @NotNull
-    private int ativo;
+    private int ativo = 1;
 
     public Cliente(String nome, String email, String telefone) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
-        this.ativo = 1;
     }
 
 }

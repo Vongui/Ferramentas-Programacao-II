@@ -26,32 +26,32 @@ public class ClienteController {
     private final ClienteMapper clienteMapper;
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Cliente>> getAll(){
+    public ResponseEntity<List<ClienteResponseDTO>> getAll(){
         List<Cliente> listaClient = clientService.getAll();
         if (listaClient.isEmpty()){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(listaClient);
+        return ResponseEntity.ok(clienteMapper.clientListToClienteResponseDtoList(listaClient));
     }
 
     @GetMapping(value = "/{codigo}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cliente> getClient(@PathVariable int codigo){
+    public ResponseEntity<ClienteResponseDTO> getClient(@PathVariable int codigo){
 
         Cliente client = clientService.getClientById(codigo);
         if (client != null){
-            return ResponseEntity.ok(client);
+            return ResponseEntity.ok(clienteMapper.clientToClientResponseDTO(client));
         }
         return ResponseEntity.notFound().build();
     }
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Cliente>> getByNome(@RequestParam(value = "nome", defaultValue = "") String nome){
+    public ResponseEntity<List<ClienteResponseDTO>> getByNome(@RequestParam(value = "nome", defaultValue = "") String nome){
         List<Cliente> listaCliente = clientService.getClientByNome(nome);
         if (listaCliente.isEmpty()){
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(listaCliente);
+        return ResponseEntity.ok(clienteMapper.clientListToClienteResponseDtoList(listaCliente));
     }
 
     @PostMapping(value = "",
@@ -66,10 +66,10 @@ public class ClienteController {
 
     @DeleteMapping(value = "/{codigo}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cliente> deleteClient(@PathVariable int codigo){
+    public ResponseEntity<ClienteResponseDTO> deleteClient(@PathVariable int codigo){
         Cliente client = clientService.delete(codigo);
         if (client != null){
-            return ResponseEntity.ok(client);
+            return ResponseEntity.ok(clienteMapper.clientToClientResponseDTO(client));
         }
         return ResponseEntity.notFound().build();
     }
@@ -78,10 +78,10 @@ public class ClienteController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
 
-    public ResponseEntity<Cliente> updateClient(@PathVariable int codigo, @RequestBody ClienteDTO dto) {
+    public ResponseEntity<ClienteResponseDTO> updateClient(@PathVariable int codigo, @RequestBody ClienteDTO dto) {
 
         Cliente clientAlter = clientService.updateClient(codigo, clienteMapper.clientDtoTOClient(dto));
-        return ResponseEntity.ok(clientAlter);
+        return ResponseEntity.ok(clienteMapper.clientToClientResponseDTO(clientAlter));
     }
 
     @PatchMapping(value = "/{codigo}/ativar")

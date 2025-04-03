@@ -19,6 +19,7 @@ public class ItemOrdemServicoController {
 
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ItemOrdemServico> getAll() {
+
         return itemOrdemServicoService.findAll();
     }
 
@@ -32,18 +33,21 @@ public class ItemOrdemServicoController {
         return ResponseEntity.ok(item);
     }
 
-    @PostMapping
-    public ItemOrdemServico create(@RequestBody ItemOrdemServicoDTO dto) {
-        ItemOrdemServico item = itemOrdemServicoService.save(convertToEntity(dto));
-        return convertToDTO(item);
-    }
+//    @PostMapping(value = "",
+//                consumes = MediaType.APPLICATION_JSON_VALUE,
+//                produces = MediaType.APPLICATION_JSON_VALUE
+//    )
+//    public ItemOrdemServico create(@RequestBody ItemOrdemServico itemOrdemServico) {
+//
+//        ItemOrdemServico
+//    }
 
-    @DeleteMapping("/{ordemServicoId}/{numeroItem}")
-    public ResponseEntity<Void> delete(@PathVariable int ordemServicoId, @PathVariable int numeroItem) {
-        ItemOrdemServicoId id = new ItemOrdemServicoId(ordemServicoId, numeroItem);
-        if (itemOrdemServicoService.findById(id).isPresent()) {
-            itemOrdemServicoService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+//    @DeleteMapping("/{ordemServicoId}/{numeroItem}")
+//    public ResponseEntity<Void> delete(@PathVariable int ordemServicoId, @PathVariable int numeroItem) {
+//        ItemOrdemServicoId id = new ItemOrdemServicoId(ordemServicoId, numeroItem);
+//        if (itemOrdemServicoService.findById(id).isPresent()) {
+//            itemOrdemServicoService.deleteById(id);
+//            return ResponseEntity.noContent().build();
+//        }
+//        return ResponseEntity.notFound().build();
     }
