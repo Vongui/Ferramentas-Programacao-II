@@ -1,6 +1,7 @@
 package br.edu.ifsp.pep.bcc.controle.demo.controller.advice;
 
 import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.ApiError;
+import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NoContent;
 import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,18 @@ public class ControlAdvice {
                 .errors(List.of(ex.getMessage()))
                 .build();
         return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(NoContent.class)
+    public ResponseEntity<ApiError> noContent(Exception ex) {
+        ApiError apiError = ApiError
+                .builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.OK.value())
+                .status(HttpStatus.OK.name())
+                .errors(List.of(ex.getMessage()))
+                .build();
+        return new ResponseEntity<>(apiError, HttpStatus.OK);
     }
 
 }

@@ -1,5 +1,6 @@
 package br.edu.ifsp.pep.bcc.controle.demo.service;
 
+import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NoContent;
 import br.edu.ifsp.pep.bcc.controle.demo.model.entities.OrdemServico;
 import br.edu.ifsp.pep.bcc.controle.demo.repository.OrdemServicoRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,10 @@ public class OrdemServicoService {
 
     private final OrdemServicoRepository ordemServicoRepository;
 
-    public List<OrdemServico> findAll() {
+    public List<OrdemServico> findAll() throws NoContent{
         List<OrdemServico> ordens = ordemServicoRepository.findAll();
         if (ordens.isEmpty()) {
-            return null;
+            throw new NoContent("Lista de ordens de servico vazia!!");
         }
         return ordens;
     }
