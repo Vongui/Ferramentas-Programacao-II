@@ -3,6 +3,7 @@ package br.edu.ifsp.pep.bcc.controle.demo.controller;
 import br.edu.ifsp.pep.bcc.controle.demo.controller.dto.ClienteDTO;
 import br.edu.ifsp.pep.bcc.controle.demo.controller.dto.ClienteMapper;
 import br.edu.ifsp.pep.bcc.controle.demo.controller.dto.ClienteResponseDTO;
+import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NoContent;
 import br.edu.ifsp.pep.bcc.controle.demo.model.entities.Cliente;
 import br.edu.ifsp.pep.bcc.controle.demo.service.ClienteService;
 import jakarta.validation.Valid;
@@ -28,7 +29,7 @@ public class ClienteController {
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClienteResponseDTO>> getAll(){
         List<Cliente> listaClient = clientService.getAll();
-        if (listaClient.isEmpty()){
+        if (listaClient == null){
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(clienteMapper.clientListToClienteResponseDtoList(listaClient));

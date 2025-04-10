@@ -1,5 +1,6 @@
 package br.edu.ifsp.pep.bcc.controle.demo.service;
 
+import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NoContent;
 import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NotFoundException;
 import br.edu.ifsp.pep.bcc.controle.demo.model.entities.Cliente;
 import br.edu.ifsp.pep.bcc.controle.demo.repository.ClienteRepository;
@@ -51,10 +52,10 @@ public class ClienteService {
         return null;
     }
 
-    public List<Cliente> getAll(){
+    public List<Cliente> getAll() throws NoContent{
         List<Cliente> listaClientes = clienteRepository.findAll();
         if (listaClientes.isEmpty()){
-            return null;
+            throw new NoContent("Lista de clientes vazia!");
         }
         return listaClientes;
     }
