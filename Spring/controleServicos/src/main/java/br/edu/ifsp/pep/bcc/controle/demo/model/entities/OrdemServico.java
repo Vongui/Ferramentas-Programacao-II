@@ -28,7 +28,7 @@ public class OrdemServico implements Serializable {
 
     @Column(name = "data_abertura")
     @NotNull
-    private LocalDate dataAbertura;
+    private LocalDate dataAbertura = LocalDate.now();
 
     @Column(name = "data_fechamento")
     private LocalDate dataFechamento;
@@ -40,7 +40,7 @@ public class OrdemServico implements Serializable {
 
     @Column(name = "status")
     @NotNull
-    private int status;
+    private int status = 1;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", referencedColumnName = "codigo")

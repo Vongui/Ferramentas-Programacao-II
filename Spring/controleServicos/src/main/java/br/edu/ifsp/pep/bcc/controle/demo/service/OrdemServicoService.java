@@ -1,6 +1,8 @@
 package br.edu.ifsp.pep.bcc.controle.demo.service;
 
 import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NoContent;
+import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NotFoundException;
+import br.edu.ifsp.pep.bcc.controle.demo.model.entities.Cliente;
 import br.edu.ifsp.pep.bcc.controle.demo.model.entities.OrdemServico;
 import br.edu.ifsp.pep.bcc.controle.demo.repository.OrdemServicoRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +40,14 @@ public class OrdemServicoService {
 
     public void delete(int id) {
         ordemServicoRepository.deleteById(id);
+    }
+
+    public OrdemServico update(Integer id, OrdemServico ordemServicoAtualizada) {
+        OrdemServico ordemExistente = findById(id);
+        if (ordemExistente == null) {
+            throw new NoContent("Ordem de serviço não encontrada para atualização!");
+        }
+        ordemServicoAtualizada.setNumero(id); // Garante que o ID não será alterado
+        return ordemServicoRepository.save(ordemServicoAtualizada);
     }
 }
