@@ -1,0 +1,18 @@
+<h1>Cadastro de Cliente</h1>
+
+<form [formGroup]="formGroup">
+    <div>
+        <label for="nome">Nome</label>
+        <input id="nome" type="text" formControlName="nome"/>
+        @if (formGroup.controls.nome.touched && !formGroup.valid) {
+            <span> Informe o Nome</span>
+        }
+    </div>
+    <div>
+        <label for="telefone">Telefone</label>
+        <input id="telefone" type="text" formControlName="telefone" />
+    </div>
+
+    <button (click)="cadastrar()" [disabled]="!formGroup.valid">Cadastrar</button>
+</form>
+
