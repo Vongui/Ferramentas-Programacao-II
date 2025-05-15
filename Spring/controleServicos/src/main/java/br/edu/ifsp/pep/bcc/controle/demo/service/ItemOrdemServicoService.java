@@ -27,13 +27,14 @@ public class ItemOrdemServicoService {
         return itemOrdemServicoRepository.save(item);
     }
 
-//    public ItemOrdemServico update(ItemOrdemServicoId id, ItemOrdemServico itemAtualizado) {
-//        if (!itemOrdemServicoRepository.existsById(id)) {
-//            throw new NotFoundException("Item não encontrado!");
-//        }
-//        itemAtualizado.setNumeroItem(new ItemOrdemServicoId(id.getOrdemServico(), id.getOrdemServico()));
-//        return itemOrdemServicoRepository.save(itemAtualizado);
-//    }
+    public ItemOrdemServico update(ItemOrdemServicoId id, ItemOrdemServico itemAtualizado) {
+        if (!itemOrdemServicoRepository.existsById(id)) {
+            throw new NotFoundException("Item não encontrado!");
+        }
+        itemAtualizado.setNumeroItem(id.getNumeroItem());
+        itemAtualizado.setOrdemServico(itemAtualizado.getOrdemServico());
+        return itemOrdemServicoRepository.save(itemAtualizado);
+    }
 
     public void deleteById(ItemOrdemServicoId id) {
         if (!itemOrdemServicoRepository.existsById(id)) {

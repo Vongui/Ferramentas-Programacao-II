@@ -28,7 +28,6 @@ public class ItemOrdemServico implements Serializable {
     @Column(name = "nr-item")
     private Integer numeroItem;
 
-
     @Column(name = "servico")
     @NotBlank(message = "Servico não pode estar vazio!!")
     @Size(min = 2, max = 100)
