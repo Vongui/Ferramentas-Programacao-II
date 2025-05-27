@@ -6,7 +6,7 @@
               <td>Nome</td>
               <td>Telefone</td>
               <td>E-mail</td>
-              <td></td>
+              <td>Ações</td>
           </tr>
       </thead>
       <tbody>
@@ -15,11 +15,28 @@
                   <td>{{ cliente.nome }}</td>
                   <td>{{ cliente.telefone }}</td>
                   <td>{{ cliente.email }}</td>
-                  <td>
-                    <button (click)="remover(cliente.id)">Remover</button>
+                  <td class="botoes-tabela">
+                    <div>
+                      <button (click)="remover(cliente.id)">
+                        <img src="recycle-bin.png">
+                      </button>
+                      <button (click)="remover(cliente.id)">
+                        <img src="editing.png">
+                      </button>
+                    </div>
                   </td>
               </tr>
           }
       </tbody>
   </table>
+</div>
+<div class="botoes">
+  <button>
+    <img src="registro.png" alt="">
+    Cadastrar
+  </button>
+  <button>
+    <img src="cancelar.png">
+    <span>Cancelar</span>
+  </button>
 </div>
