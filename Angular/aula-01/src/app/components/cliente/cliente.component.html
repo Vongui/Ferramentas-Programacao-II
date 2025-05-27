@@ -1,22 +1,25 @@
 <h1>Lista de Clientes</h1>
-<table>
-    <thead>
-        <tr>
-            <td>Nome</td>
-            <td>Telefone</td>
-            <td>E-mail</td>
-        </tr>
-    </thead>
-    <tbody>
-        @for (cliente of cliente$ | async; track cliente) {
-            <tr>
-                <td>{{ cliente.nome }}</td>
-                <td>{{ cliente.telefone }}</td>
-                <td>{{ cliente.email }}</td>
-                <td>
-                  <button (click)="remover(cliente.id)">Remover</button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div>
+  <table>
+      <thead>
+          <tr>
+              <td>Nome</td>
+              <td>Telefone</td>
+              <td>E-mail</td>
+              <td></td>
+          </tr>
+      </thead>
+      <tbody>
+          @for (cliente of cliente$ | async; track cliente) {
+              <tr>
+                  <td>{{ cliente.nome }}</td>
+                  <td>{{ cliente.telefone }}</td>
+                  <td>{{ cliente.email }}</td>
+                  <td>
+                    <button (click)="remover(cliente.id)">Remover</button>
+                  </td>
+              </tr>
+          }
+      </tbody>
+  </table>
+</div>

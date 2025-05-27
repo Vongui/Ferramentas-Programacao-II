@@ -1,0 +1,45 @@
+/* possivel aplicar css em tag, classe ou id
+.botao -> classe
+#botao -> id
+botao -> tag
+*/
+
+:host {
+  font-size: 1rem;
+  display: block;
+  margin: 0 auto;
+  width: 75vw;
+  height: 75vh;
+  padding: 20px;
+  background-color: whitesmoke;
+
+}
+
+div {
+  margin-bottom: 20px;
+
+  button {
+    margin-left: 1px;
+  }
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead{
+  td {
+    font-weight: bold;
+  }
+}
+
+td {
+  border: 1px solid;
+  padding: 5px;
+
+}
