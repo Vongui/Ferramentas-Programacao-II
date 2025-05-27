@@ -1,18 +1,22 @@
-<h1>Cadastro de Cliente</h1>
-
-<form [formGroup]="profileForm">
-    <div>
-        <label for="nome">Nome</label>
-        <input id="nome" type="text" formControlName="nome"/>
-        @if (profileForm.controls.nome.touched && !profileForm.valid) {
-            <span> Informe o Nome</span>
+<h1>Lista de Clientes</h1>
+<table>
+    <thead>
+        <tr>
+            <td>Nome</td>
+            <td>Telefone</td>
+            <td>E-mail</td>
+        </tr>
+    </thead>
+    <tbody>
+        @for (cliente of cliente$ | async; track cliente) {
+            <tr>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.telefone }}</td>
+                <td>{{ cliente.email }}</td>
+                <td>
+                  <button (click)="remover(cliente.id)">Remover</button>
+                </td>
+            </tr>
         }
-    </div>
-    <div>
-        <label for="telefone">Telefone</label>
-        <input id="telefone" type="text" formControlName="telefone" />
-    </div>
-
-    <button (click)="cadastrar()" [disabled]="!profileForm.valid">Cadastrar</button>
-</form>
-
+    </tbody>
+</table>
