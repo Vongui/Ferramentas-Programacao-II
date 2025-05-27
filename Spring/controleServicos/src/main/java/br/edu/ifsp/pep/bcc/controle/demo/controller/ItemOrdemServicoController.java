@@ -59,17 +59,18 @@ public class ItemOrdemServicoController {
         return ResponseEntity.status(201).body(novoItem);
     }
 
-//    @Operation(summary = "Atualizar um item")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Item atualizado com sucesso"),
-//            @ApiResponse(responseCode = "404", description = "Item não encontrado para atualização")
-//    })
-//    @PutMapping("/{ordemServicoId}/{numeroItem}")
-//    public ResponseEntity<ItemOrdemServico> update(@PathVariable int ordemServicoId, @PathVariable int numeroItem, @RequestBody ItemOrdemServico item) {
-//        ItemOrdemServicoId id = new ItemOrdemServicoId(ordemServicoId, numeroItem);
-//        ItemOrdemServico itemAtualizado = service.update(id, item);
-//        return ResponseEntity.ok(itemAtualizado);
-//    }
+    @Operation(summary = "Atualizar um item")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Item atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Item não encontrado para atualização")
+    })
+    @PutMapping("/{ordemServicoId}/{numeroItem}")
+    public ResponseEntity<ItemOrdemServico> update(@PathVariable int ordemServicoId,
+    @PathVariable int numeroItem, @RequestBody ItemOrdemServico item) {
+        ItemOrdemServicoId id = new ItemOrdemServicoId(ordemServicoId, numeroItem);
+        ItemOrdemServico itemAtualizado = service.update(id, item);
+        return ResponseEntity.ok(itemAtualizado);
+    }
 
     @Operation(summary = "Excluir um item")
     @ApiResponses(value = {

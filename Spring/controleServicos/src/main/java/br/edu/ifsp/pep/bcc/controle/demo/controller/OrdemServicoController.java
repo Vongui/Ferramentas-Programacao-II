@@ -41,6 +41,10 @@ public class OrdemServicoController {
             return ResponseEntity.noContent().build();
         }
 
+        for (OrdemServico ordem : ordens) {
+            System.out.println(ordem.getCliente().getCodigo());
+            System.out.println(ordem.getCliente().getNome());
+        }
         return ResponseEntity.ok(ordemServicoMapper.listOrdemServToListOrdemServDto(ordens));
     }
 
