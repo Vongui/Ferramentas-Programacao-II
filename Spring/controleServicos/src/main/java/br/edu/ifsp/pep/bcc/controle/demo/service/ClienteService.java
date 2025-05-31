@@ -4,6 +4,7 @@ import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NoContent;
 import br.edu.ifsp.pep.bcc.controle.demo.controller.exception.NotFoundException;
 import br.edu.ifsp.pep.bcc.controle.demo.model.entities.Cliente;
 import br.edu.ifsp.pep.bcc.controle.demo.repository.ClienteRepository;
+import br.edu.ifsp.pep.bcc.controle.demo.repository.OrdemServicoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import static java.util.Objects.nonNull;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final OrdemServicoRepository ordemServicoRepository;
 
     public Cliente create(Cliente client) throws Exception {
         try {
@@ -43,14 +45,19 @@ public class ClienteService {
         return false;
     }
 
-    public Cliente delete(int codigo) {
-        Optional<Cliente> cliente = clienteRepository.findById(codigo);
-        if (cliente.isPresent()) {
-            clienteRepository.delete(cliente.get());
-            return cliente.get();
+    public Cliente delete(int id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        boolean temOrdemServico = ordemServicoRepository.existsByCliente(cliente);
+        if (temOrdemServico) {
+            throw new RuntimeException("Cliente possui ordens de serviço e não pode ser excluído.");
         }
-        return null;
+
+        clienteRepository.deleteById(id);
+        return cliente;
     }
+
 
     public List<Cliente> getAll() throws NoContent{
         List<Cliente> listaClientes = clienteRepository.findAll();
