@@ -3,6 +3,7 @@
   <table>
       <thead>
           <tr>
+              <td>Código</td>
               <td>Nome</td>
               <td>Telefone</td>
               <td>E-mail</td>
@@ -12,15 +13,16 @@
       <tbody>
           @for (cliente of cliente$ | async; track cliente) {
               <tr>
+                  <td>{{ cliente.codigo }}</td>
                   <td>{{ cliente.nome }}</td>
                   <td>{{ cliente.telefone }}</td>
                   <td>{{ cliente.email }}</td>
                   <td class="botoes-tabela">
                     <div>
-                      <button (click)="remover(cliente.id)">
+                      <button (click)="remover(cliente.codigo)">
                         <img src="recycle-bin.png">
                       </button>
-                      <button (click)="remover(cliente.id)">
+                      <button (click)="remover(cliente.codigo)">
                         <img src="editing.png">
                       </button>
                     </div>

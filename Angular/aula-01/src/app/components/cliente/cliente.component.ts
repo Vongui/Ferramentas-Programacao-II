@@ -23,12 +23,17 @@ export class ClienteComponent implements OnInit {
     this.buscarClientes();
   }
 
-  public async remover(id: number){
-    const clienteExcluido = await this.clienteService.remover(id);
-    console.log(clienteExcluido)
-
-    this.buscarClientes()
-  }
+   public remover(id: number) {
+       this.clienteService.remover(id).subscribe({
+           next: (response) => {
+               console.log('Cliente excluído:', response);
+               this.buscarClientes();
+           },
+           error: (err) => {
+               console.error('Erro ao excluir cliente:', err);
+           }
+       });
+   }
 
   public buscarClientes() {
       this.cliente$ = this.clienteService.buscarClientes();

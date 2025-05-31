@@ -7,7 +7,7 @@ import { Cliente } from '../models/cliente.model';
   providedIn: 'root'
 })
 export class ClientesService {
-  private api = `${environment.api}/clientes`;
+  private api = `${environment.api_clientes}/cliente/`;
   private http = inject(HttpClient);
 
   constructor() { }
@@ -16,8 +16,8 @@ export class ClientesService {
     return this.http.get<Cliente[]>(`${this.api}`)
   }
 
-  public remover(id: number){
-    return this.http.delete(`${this.api}/${id}`)
+  public remover(codigo: number){
+    return this.http.delete(`${this.api}${codigo}`)
   }
 
 }
