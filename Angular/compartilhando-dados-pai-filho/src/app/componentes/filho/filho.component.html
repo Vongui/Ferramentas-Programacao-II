@@ -1,0 +1,25 @@
+<p>filho works!</p>
+<!--
+<p>{{ nome }}</p>
+<p>{{ valor }}</p>
+<p>{{ itens }}</p>
+
+<button (click)="avisar()">Avisar Pai</button> -->
+
+Tabela Filho
+<br/>
+<br/>
+
+  <table>
+  <thead>
+    <tr>
+      <th *ngFor="let coluna of colunasPai">{{ coluna }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let linha of linhasPai">
+      <td *ngFor="let itens of linha">{{ itens }}</td>
+    </tr>
+  </tbody>
+</table>
+
