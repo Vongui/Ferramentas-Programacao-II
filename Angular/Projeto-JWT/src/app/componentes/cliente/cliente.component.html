@@ -1,0 +1,42 @@
+<h1>Lista de Clientes</h1>
+<div>
+  <label for="pesquisa">Campo Pesquisa</label>
+  <input type="text" />
+  <button class="botao">Pesquisar</button>
+</div>
+<table>
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>Nome</td>
+      <td>Telefone</td>
+      <td>E-mail</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    @for (cliente of cliente$ | async; track cliente.id) {
+    <tr>
+      <td>{{ cliente.id }}</td>
+      <td>{{ cliente.nome }}</td>
+      <td>{{ cliente.telefone }}</td>
+      <td>{{ cliente.email }}</td>
+      <td class="botoes-tabela">
+        <div>
+          <button (click)="remover(cliente.id)">
+            <img src="recycle-bin.png" />
+          </button>
+          <button (click)="remover(cliente.id)">
+            <img src="editing.png" />
+          </button>
+        </div>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+<div class="botoes">
+    <button class="botao">Cadastrar</button>
+    <button class="botao danger">Cancelar</button>
+</div>
+

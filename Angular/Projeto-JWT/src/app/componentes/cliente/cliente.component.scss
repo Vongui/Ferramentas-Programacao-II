@@ -1,0 +1,88 @@
+$cor-primaria: rgb(22, 2, 112);
+
+:host {
+  font-size: 0.9rem;
+  display: block;
+  margin: 0 auto;
+  width: 80vw;
+  height: 80vh;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+//div de pesquisa
+div {
+  margin-bottom: 20px;
+
+  label {
+    margin-right: 10px;
+    color: $cor-primaria;
+    font-weight: bold;
+  }
+  button {
+    margin-left: 10px;
+  }
+}
+
+h1 {
+  text-align: center;
+  color: $cor-primaria;
+}
+
+//tag
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  td {
+    font-weight: bold;
+  }
+}
+
+td {
+  border: 2px solid $cor-primaria;
+  padding: 10px;
+}
+
+.botoes {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.botao {
+  border: none;
+  background-color: $cor-primaria;
+  border-radius: 8px;
+  padding: 8px;
+  color: white;
+  margin: 0;
+}
+
+.danger {
+    background-color: rgb(164, 17, 17);
+}
+
+//classe
+.botoes-tabela {
+  width: 100px;
+  div {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+    button {
+      margin: 0;
+    }
+  }
+  img {
+    width: 16px;
+  }
+}
+
+//id
+#titulo {
+}

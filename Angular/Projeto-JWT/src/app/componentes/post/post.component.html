@@ -1,0 +1,6 @@
+<p>post works!</p>
+
+@for (post of posts$ | async; track post.id) {
+    <p>{{ post.title }}</p>
+}
+

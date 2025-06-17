@@ -1,0 +1,32 @@
+<h1>Cadastro de Cliente</h1>
+
+<form [formGroup]="profileForm">
+  <div>
+    <label for="nome">Nome</label>
+    <input id="nome" type="text" formControlName="nome" />
+    @if (profileForm.controls.nome.touched && !profileForm.controls.nome.valid)
+    { @if (profileForm.controls.nome.hasError('required')) {
+    <span>Informe o Nome.</span>
+    } @if (profileForm.controls.nome.hasError('minlength')) {
+    <span>Informe pelo menos 3 caracteres.</span>
+    } }
+  </div>
+  <div>
+    <label for="telefone">Telefone</label>
+    <input id="telefone" type="text" formControlName="telefone" />
+
+    @if (profileForm.controls.telefone.touched &&
+    !profileForm.controls.telefone.valid) {
+    <span>Informe o Telefone</span>
+    }
+  </div>
+  <div>
+    <label for="idade">Idade</label>
+    <input id="idade" type="number" formControlName="idade" />
+  </div>
+  <button (click)="cadastrar()" [disabled]="!profileForm.valid">
+    Cadastrar
+  </button>
+
+  <p>Form Status: {{ profileForm.status }}</p>
+</form>

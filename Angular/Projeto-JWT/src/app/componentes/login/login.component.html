@@ -1,0 +1,19 @@
+<form [formGroup]="form">
+  <div>
+    <label for="login">Login</label>
+    <input type="text" id="login" formControlName="nomeLogin" />
+  </div>
+  <div>
+    <label for="senha">Senha</label>
+    <input type="text" id="senha" formControlName="senha" />
+  </div>
+
+  <button (click)="acessar()" [disabled]="!form.valid">Acessar</button>
+
+  <button (click)="buscarUsuarios()" >Usuários</button>
+
+  <button (click)="criarUsuario()" >Criar Usuários</button>
+  <button (click)="login()">Login</button>
+  <button (click)="acessarRotaPrivada()">Acessar Rota Privada</button>
+
+</form>

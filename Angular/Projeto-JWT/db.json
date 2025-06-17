@@ -1,0 +1,30 @@
+{
+  "posts": [
+    { "id": "1", "title": "a title", "views": 100 },
+    { "id": "2", "title": "another title", "views": 200 }
+  ],
+  "comments": [
+    { "id": "1", "text": "a comment about post 1", "postId": "1" },
+    { "id": "2", "text": "another comment about post 1", "postId": "1" }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "clientes": [
+    {
+      "nome": "Maria Antonia",
+      "telefone": "(18)99912-9128",
+      "email": "maria@gmail.com"
+    },
+    {
+      "nome": "Luis Carlos",
+      "telefone": "(18)99123-3128",
+      "email": "lucar@gmail.com"
+    },
+    {
+      "nome": "Ana Claudia",
+      "telefone": "(18)98231-9128",
+      "email": "clau@gmail.com"
+    }
+  ]
+}
