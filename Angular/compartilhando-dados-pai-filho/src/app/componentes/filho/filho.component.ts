@@ -22,5 +22,20 @@ export class FilhoComponent {
 
   @Input() colunasPai: string[] = [];
   @Input() linhasPai: any[] = [];
+  @Input() dadosJsonPai: any[] = [];
+
+  constructor() {
+    console.log(1);
+    this.funcaoFoda();
+  }
+
+  funcaoFoda() {
+    for(let d of this.dadosJsonPai){
+      console.log(d)
+    }
+    console.log(this.dadosJsonPai);
+
+  }
+
 }
 
