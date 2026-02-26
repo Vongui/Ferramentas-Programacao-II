@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+* {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+}
+
+header {
+    background-color: #2563eb;
+    color: white;
+    width: 100%;
+    margin-bottom: 20px;
+    display: block;
+}
+
+footer {
+    text-align: center;
+    background-color: #0f172a;
+    color: white;
+    margin-top: 20px;
+    padding: 8px;
+    font-size: 10px;
+
+    a, a:visited {
+        color: white;
+    }
+}
+
+.menu-superior {
+    padding: 10px;   
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1080px;
+    width: 100%;
+    margin: auto;
+}
+
+.menu-texto {
+    flex: 3;
+}
+
+.menu-itens {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+}
+
+.header-container {
+    max-width: 1080px;
+    width: 100%;
+    margin: auto;
+}
+
+.header-titulo {
+    padding: 10px;
+    font-weight: 700;
+}
+
+.header-texto {
+    padding-left: 10px;
+}
+
+.header-button {
+    padding: 10px;
+    margin-left: 5px;
+    margin-top: 10px;
+    text-align: center;
+    color: #2563eb;
+    background-color: white;
+    border-radius: 6px; 
+    cursor: pointer;
+}
+
+.header-button:hover {
+    background-color: #ddd;
+}
+
+.depoimentos {
+    background-color: #e2e8f0;
+    padding: 24px 0;
+
+    h2 {
+        font-weight: 700;
+    }
+}
+
+.depoimentos-conteiner {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 16px;
+    
+    p {
+        flex: 2;
+        background-color: #f1f5f9;
+        margin: 10px;
+        padding: 10px;
+        margin-bottom: 25px;
+        border-radius: 6px;
+    }
+}
+
+.inscricao {
+
+    h2 {
+        font-weight: 700;
+    }
+
+    form {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        input, textarea {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: #2563eb;
+            color: white;
+            padding: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            background-color: #1e40af;
+        }
+    }
+
+}
+
+.diferenciais {
+    h2 {
+        font-weight: 700;
+    }
+}
+
+.diferenciais-conteiner {
+    display: flex;
+    gap: 10px;
+
+    p{
+        flex: 2;
+        background-color: #f1f5f9;
+        margin: 10px;
+        padding: 10px;
+        margin-bottom: 25px;
+        border-radius: 6px;
+        
+    }
+
+    p:hover {
+        background-color: white;
+    }
+}
+
+.sobre {
+    margin-left: 15px;
+    ul {
+        margin: 10px;
+    }
+
+    h2, span {
+        font-weight: 700;
+    }
+}
+
+.sobre-marg,
+.diferenciais-marg,
+.inscricao-marg,
+.depoimentos-marg {
+    max-width: 1080px;
+    width: 100%;
+    margin: auto;
+}
+
+@media (max-width: 768px) {
+    .menu-superior {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 10px;
+    }
+
+    .menu-texto {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .menu-itens {
+        justify-content: center;
+        padding: 0;
+        gap: 15px;
+    }
+
+    .header-container,
+    .sobre-marg,
+    .diferenciais-marg,
+    .depoimentos-marg,
+    .inscricao-marg {
+        padding: 0 20px;
+    }
+
+    .sobre {
+        margin-left: 0;
+    }
+
+    .header-titulo, 
+    .header-texto {
+        padding-left: 0;
+    }
+
+    .header-button {
+        margin-left: 0;
+    }
+
+    .diferenciais-conteiner {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .diferenciais-conteiner p {
+        margin: 10px 0;
+    }
+
+    .depoimentos-conteiner {
+        flex-direction: column;
+        padding: 0;
+        gap: 0;
+    }
+
+    .depoimentos-conteiner p {
+        margin: 10px 0;
+    }
+
+    .inscricao form {
+        width: 100%;
+    }
+
+    .inscricao form input,
+    .inscricao form textarea {
+        padding: 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        width: 100%;
+    }
+}
+
