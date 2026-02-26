@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>HTML - Inputs</h1>
+    </header>
+    
+    <form action="">
+        <h2 id="h2_form">Text</h2>
+            <label for="nome">Nome</label>
+            <input type="text" id="nome">
+        <br>
+
+        <label for="telefone">Telefone</label>
+        <input type="text" id="telefone">
+        <br>
+        
+        <br>
+        <h2 id="h2_form">Radio</h2>
+            <label for="linguagem-web">Escolha sua linguagem web favoria</label><br>
+
+            <input type="radio" id="html" name="fav_language" value="HTML">
+            <label for="html">HTML</label><br>
+
+            <input type="radio" id="css" name="fav_language" value="CSS">
+            <label for="css">CSS</label><br>
+            
+            <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+            <label for="javascript">JavaScript</label>
+            
+        <br>
+        
+        <label for="choice_cor">Escolha sua cor favoria</label><br>
+
+        <input type="radio" id="azul" name="fav_cor" value="Azul">
+        <label for="azul">Azul</label><br>
+
+        <input type="radio" id="roxo" name="fav_cor" value="Roxo">
+        <label for="roxo">Roxo</label><br>
+
+        <input type="radio" id="vermelho" name="fav_cor" value="Vermelho">
+        <label for="vermelho">Vermelho</label>
+        <br>
+
+        <br>
+        <h2 id="h2_form">Checkbox</h2>
+            <fieldset>
+                <legend for="idioma">Quais idiomas você possui conhecimento</legend><br>
+
+                <input type="checkbox" id="portugues" name="portugues" value="Portugues">
+                <label for="portugues">Português</label><br>
+
+                <input type="checkbox" id="ingles" name="ingles" value="Ingles">
+                <label for="ingles">Inglês</label><br>
+
+                <input type="checkbox" id="espanhol" name="espanhol" value="Espanhol">
+                <label for="espanhol">Espanhol</label>
+            </fieldset>
+        <br>
+
+        <br>
+        <h2 id="h2_form">Select</h2>
+            <label for="curso">Selecione o seu curso</label>
+            <select name="curso" id="curso">
+                <option value="" selected="true">Selecione</option>
+                <option value="BCC" >BCC</option>
+                <option value="BEE">BEE</option>
+            </select>
+        <br>
+
+        <br>
+        <h2 id="h2_form">TextArea</h2>
+            <label for="observacao">Observação</label>
+            <textarea name="observacao" id="observacao" cols="40" rows="5"></textarea>
+        <br>
+
+        <br>
+        <h2>Demais inputs</h2>
+            <label for="">Telefone</label>
+            <input type="tel">
+            <br>
+
+            <br>
+            <label for="">Numero</label>
+            <input type="number">
+            <br>
+
+            <br>
+                <label for="">Data</label>
+                <input type="date">
+                <input type="datetime-local">
+                <input type="time">
+            <br>
+
+            <br>
+                <label for="">Cor</label>
+                <input type="color">
+            <br>
+
+            <br>
+                <button type="reset">Reset</button>
+            <br>
+
+    </form>
+
+    <footer>
+        <p>© 2026, Guilherme Moraes</footer></p>
+    </footer>
+</body>
+</html>
