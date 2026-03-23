@@ -42,6 +42,14 @@ footer {
     max-width: 1080px;
     width: 100%;
     margin: auto;
+     a {
+        color: white;
+        text-decoration: none;
+     }
+
+     a:hover {
+        text-decoration: underline;
+     }
 }
 
 .menu-texto {
