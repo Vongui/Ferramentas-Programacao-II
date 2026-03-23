@@ -1,0 +1,29 @@
+<h2>Minhas tarefas</h2>
+
+<div>
+  <p><strong>Total:</strong> {{ totalTarefas }} tarefas</p>
+  <p><strong>Concluídas:</strong> {{ tarefasConcluidas }}</p>
+  <p><strong>Pendentes:</strong> {{ tarefasPendentes }}</p>
+</div>
+
+@if (tarefas.length === 0) {
+  <div>
+    <p>Nenhuma tarefa cadastrada</p>
+  </div>
+} @else {
+  <ul>
+    @for (tarefa of tarefas; track tarefa.id; let i = $index) {
+      <li>
+        <strong>{{ i + 1 }}.</strong> {{ tarefa.descricao }}
+
+        @if (tarefa.concluida) {
+          <span>(concluída)</span>
+        }
+
+        <button (click)="alternarTarefa(i)">
+          {{ tarefa.concluida ? 'Reabrir' : 'Concluir' }}
+        </button>
+      </li>
+    }
+  </ul>
+}
