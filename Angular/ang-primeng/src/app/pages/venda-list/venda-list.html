@@ -1,0 +1,74 @@
+<div class="card">
+  <div class="flex justify-center items-center mb-6 gap-2">
+      <p-toggle-switch [(ngModel)]="metaKey" inputId="input-metakey" />
+      <label for="input-metakey">MetaKey</label>
+    </div>
+
+<p-table
+  #dt
+  [value]="(vendas$ | async)!"
+  [paginator]="true"
+  [rows]="5"
+  stripedRows
+  [showCurrentPageReport]="true"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} vendas"
+  [rowsPerPageOptions]="[5, 10, 15]"
+  sortMode="multiple"
+  [multiSortMeta]="[{field: 'cliente', order:1}, {field: 'data', order: -1}]"
+  [globalFilterFields]="['data', 'cliente']"
+  selectionMode="multiple"
+  [(selection)]="selectedVenda"
+  [metaKeySelection]="metaKey"
+  dataKey="id"
+
+>
+  <ng-template #caption>
+    <div class="flex items-center justify-between w-full">
+      <span class="text-xl font-bold">Lista de Vendas</span>
+
+      <p-icon-field iconPosition="left" class="w-64">
+        <p-inputicon>
+          <i class="pi pi-search"></i>
+        </p-inputicon>
+        <input
+          pInputText
+          type="text"
+          class="w-full pl-10"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Procure por Palavras-Chave negro"
+        />
+      </p-icon-field>
+
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <tr>
+      <th pSortableColumn="id" style="width:33%">
+        Código
+        <p-sortIcon field="codigo"/>
+      </th>
+      <th pSortableColumn="data" style="width:33%">
+        Data
+        <p-sortIcon field="data" />
+      </th>
+      <th pSortableColumn="cliente" style="width:33%">
+        Cliente
+        <p-sortIcon field="cliente" />
+<!--        <p-columnFilter type="text" field="cliente" placeholder="Pesquisar Nome" ariaLabel="Filter Name" filterOn="input"></p-columnFilter>-->
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-venda>
+    <tr [pSelectableRow]="venda">
+      <td>{{ venda.id }}</td>
+      <td>{{ venda.data | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ venda.cliente }}</td>
+    </tr>
+  </ng-template>
+
+</p-table>
+
+<p-button label="Excluir" [disabled]="selectedVenda.length === 0" (onClick)="excluir()" />
+
+</div>
