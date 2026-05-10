@@ -1,0 +1,30 @@
+<!-- Interpolação -->
+<h1>{{ titulo }}</h1>
+
+<!-- Não utilizar chamada de metodos (html -- template) -->
+<!-- <h2>{{ getSubTitulo() }}</h2> -->
+
+<p><strong>Valor</strong> {{ valor }}</p>
+
+<!-- CommonModule -->
+<!-- <ol>
+  <li *ngFor="let item of nomes">{{ item }}</li>
+</ol> -->
+
+<ol>
+  @for (item of nomes; track $index; let i = $index) {
+    <li (click)="remover(i)">{{ item }}</li>
+  } @empty {
+    <li>Nenhum elemento.</li>
+  }
+</ol>
+
+<!-- Event binding -->
+<button (click)="exibir()">Clique</button>
+
+<button (click)="adicionar()">Adicionar</button>
+
+<button (click)="removerUltimo()">Remover Último</button>
+<button (click)="removerPrimeiro()">Remover Primeiro</button>
+
+<router-outlet />

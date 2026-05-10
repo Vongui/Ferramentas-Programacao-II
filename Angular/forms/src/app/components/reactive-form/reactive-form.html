@@ -1,0 +1,37 @@
+<p>Reactive Form</p>
+
+<form [formGroup]="form" (ngSubmit)="salvar()">
+    <div>
+        <label>
+            Nome:
+            <input formControlName="nome" />
+        </label>
+        @if(form.controls.nome.touched || form.controls.nome.dirty) {
+            @if(form.controls.nome.hasError('required')) {
+                <small>Nome é obrigatório!!</small>
+            }
+            @if(form.controls.nome.hasError('minlength')) {
+                <small>Deve conter pelo menos 3 caracteres!!</small>
+            }   
+        }
+    </div>
+
+    <div>
+        <label>
+            E-mail:
+            <input formControlName="email" />
+        </label>
+        @if(form.controls.email.touched || form.controls.email.dirty) {
+            @if(form.controls.email.hasError('required')) {
+                <small>E-mail é obrigatório!!</small>
+            }
+            @if(form.controls.email.hasError('email')) {
+                <small>Deve conter um e-mail!!</small>
+            }   
+        }
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Salvar</button>
+</form>
+
+

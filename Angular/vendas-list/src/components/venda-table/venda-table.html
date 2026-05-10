@@ -1,0 +1,31 @@
+<table border="1">
+  <thead>
+  <tr>
+    <th>Código</th>
+    <th>Data</th>
+    <th>Cliente</th>
+    <th>Itens</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    @for (venda of vendas(); track $index){
+    <tr>
+      <td>{{ venda.codigo }}</td>
+      <td>{{ venda.data }}</td>
+      <td>{{ venda.cliente }}</td>
+      <td>
+        <ul>
+          @for (item of venda.itens; track $index){
+            <li>
+              {{ item.nome_produto }} -
+              Qtd: {{ item.quantidade }} -
+              R$ {{ item.preco }}
+            </li>
+          }
+        </ul>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

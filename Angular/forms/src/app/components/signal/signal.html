@@ -1,0 +1,22 @@
+<p>Signal</p>
+<p>
+    Contador: {{ exemploCount() }}
+</p>
+
+<p>
+    Objeto: {{ exemploObj() | json }}
+</p>
+
+<p>
+  Computed: {{ exemploComputed() }}
+</p>
+
+<p>
+    ShowComputed: {{ showComputed() }}
+</p>
+
+<button (click)="increment()">Incrementar</button>
+<button (click)="setObj()">Executar</button>
+<button (click)="alterarShow()">Alterar</button>
+
+

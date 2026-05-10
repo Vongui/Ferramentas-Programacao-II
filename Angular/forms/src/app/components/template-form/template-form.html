@@ -1,0 +1,39 @@
+<p>Template Driven</p>
+
+<!-- # -> significa uma variavel dentro do html por meio do angular para se utilizada no proprio html -->
+<form #f="ngForm" (ngSubmit)="salvar(f)">
+    <div>
+        <label> 
+            Nome: 
+            <input type="text" name="nome" [(ngModel)]="pessoa.nome" required minlength="3" #nomeInput="ngModel" /> 
+        </label>
+            <div class="validacoes">
+                @if (nomeInput.invalid && (nomeInput.dirty || nomeInput.touched)) {
+                    @if (nomeInput.errors?.['required']){
+                        <small>Nome é Obrigatório</small>
+                    }
+                    @if (nomeInput.errors?.['minlength']) {
+                        <small>Informe um nome com pelo menos 3 caracteres</small>
+                    }
+                }
+            </div>
+    </div><br/>
+
+    <div>
+        <label>
+            E-mail: 
+            <input type="email" name="email" email [(ngModel)]="pessoa.email" #emailInput="ngModel">
+        </label>
+        <div class="validacoes">
+            @if (emailInput.invalid && (emailInput.dirty || emailInput.touched)) {
+                @if (emailInput.errors?.['email']) {
+                    <small>Deve conter um e-mail</small>
+                }
+            }
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="f.invalid" >Salvar</button>
+</form>
+
+
