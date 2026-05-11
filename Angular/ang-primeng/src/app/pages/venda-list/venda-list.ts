@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { VendaService } from '../../services/venda.service';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Venda } from '../../models/venda.model';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { TableModule } from 'primeng/table';
@@ -44,12 +44,28 @@ export class VendaList {
   }
 
   protected excluir() {
-    this.selectedVenda.forEach((venda: Venda) => {
-      this.vendaService.deleteSelectedVenda(venda.id)
-        .subscribe()
-    });
+    if (this.selectedVenda.length === 0) return;
 
-    this.selectedVenda = [];
-    this.obterVendas();
+    let deletesCompletos = 0;
+    const totalDeletes = this.selectedVenda.length;
+
+    this.selectedVenda.forEach((venda: Venda) => {
+      this.vendaService.deleteSelectedVenda(venda.id).subscribe({
+        next: () => {
+          deletesCompletos++;
+          console.log(`Venda ${venda.id} deletada com sucesso`);
+
+          // Recarrega apenas quando TODOS os deletes terminarem
+          if (deletesCompletos === totalDeletes) {
+            this.selectedVenda = [];
+            this.obterVendas();
+          }
+        },
+        error: (error) => {
+          console.error(`Erro ao deletar venda ${venda.id}:`, error);
+          alert(`Erro ao deletar venda ${venda.id}`);
+        }
+      });
+    });
   }
 }

@@ -22,7 +22,7 @@ export class Signal {
       return this.exemploCount() *2;
     }
     return "Não calculado"
-    
+
   });
 
   constructor(){
