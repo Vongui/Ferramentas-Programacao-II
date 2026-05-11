@@ -7,31 +7,19 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginService {
-  private baseUrl = environment.api;
-  private http = inject(HttpClient);
+  private token = false;
 
-  private token = "";
+  constructor() {
+    
+  }
 
-  async login(username: string, password: string) {
-    const user = { username, password };
-    try {
-      const res = await firstValueFrom(this.http.post<any>(`${this.baseUrl}/login`, user));
-      if (res) {
-        this.setToken(res.token);
-      }
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
+  setToken() {
+    if (this.token) {
+      return this.token = false;
     }
-  }
-
-  getAll() {
-    return this.http.get<any[]>(`${this.baseUrl}/users`);
-  }
-
-  setToken(token: string) {
-    this.token = token;
+    else{
+      return this.token = true;
+    }
   }
 
   getToken() {
@@ -39,10 +27,8 @@ export class LoginService {
   }
 
   isLogged() {
-    if (this.token) {
-      return true;
-    }
-    return false;
+    this.setToken();
+    // return this.token;
   }
 
 

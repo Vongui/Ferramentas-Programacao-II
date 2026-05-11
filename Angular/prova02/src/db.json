@@ -1,20 +1,11 @@
 {
-  "users": [],
-  "posts": [
+  "tarefas": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "titulo": "sdfsdf",
+      "descricao": "sdfsdf",
+      "prioridade": 3,
+      "dataLimite": "2026-04-28",
+      "id": 1
     }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }

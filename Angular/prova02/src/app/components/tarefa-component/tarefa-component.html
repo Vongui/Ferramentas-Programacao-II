@@ -1,0 +1,66 @@
+<form [formGroup]="form" (ngSubmit)="salvar()" >
+    <div>
+        <label>
+            Titulo:
+            <input formControlName="titulo" id="titulo">
+        </label>
+        <label>
+            Descrição:
+            <input formControlName="descricao" id="descricao">
+        </label>
+        <label>
+            Prioridade:
+            <input type="number" formControlName="prioridade" id="prioridade">
+        </label>
+        <label>
+            Data:
+            <input type="date" formControlName="data" id="data">
+        </label>
+    </div>
+
+    <button type="submit">Salvar</button>
+
+</form>
+
+<p-table
+[value]="(tarefas$ | async)!"
+[tableStyle]="{ 'min-width': '50rem' }"
+[paginator]="true"
+[rows]="5"
+stripedRows
+selectionMode="single"
+[(selection)]="selectedTarefa"
+[showCurrentPageReport]="true"
+dataKey="id"
+>
+
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <span class="text-xl font-bold">Lista de Tarefas</span>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Descrição</th>
+            <th>Prioridade</th>
+            <th>Data Limite</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-tarefa>
+        <tr [pSelectableRow]="tarefa">
+            <td>{{ tarefa.id }}</td>
+            <td>{{ tarefa.titulo }}</td>
+            <td>{{ tarefa.descricao }}</td>
+           <td>
+                @if (tarefa.prioridade === 1) { Baixa }
+                @if (tarefa.prioridade === 2) { Média }
+                @if (tarefa.prioridade === 3) { Alta }
+            </td>
+            <td>{{ tarefa.dataLimite | date: 'dd/MM/yyyy' }}</td>
+        </tr>
+    </ng-template>
+
+</p-table>
+<p-button label="Remover" (onClick)="remover()"></p-button>
