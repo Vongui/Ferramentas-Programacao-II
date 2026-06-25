@@ -1,0 +1,28 @@
+<div class="flex align-items-center justify-content-center min-h-screen">
+  <!-- <p-card header="Bem-vindo" [style]="{ width: '25rem' }"> -->
+    
+    <!-- <p-messages [value]="mensagensErro()"></p-messages> -->
+
+    <form [formGroup]="form" (ngSubmit)="fazerLogin()" class="flex flex-column gap-3">
+      
+      <div class="flex flex-column gap-1">
+        <label for="login">Login (E-mail)</label>
+        <input pInputText id="login" formControlName="login" placeholder="Digite seu e-mail" />
+      </div>
+
+      <div class="flex flex-column gap-1">
+        <label for="password">Senha</label>
+        <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false" placeholder="Digite sua senha"></p-password>
+      </div>
+
+      <p-button label="Entrar" type="submit" [disabled]="form.invalid" styleClass="w-full mt-2"></p-button>
+      <!-- <p-button label="Entrar" type="submit" [disabled]="form.invalid" [loading]="carregando()" styleClass="w-full mt-2"></p-button> -->
+
+    </form>
+
+    <div class="text-center mt-4">
+      <span class="text-secondary">Não tem uma conta? </span>
+      <a routerLink="/register" class="font-bold no-underline text-primary">Cadastre-se</a>
+    </div>
+  <!-- </p-card> -->
+</div>
