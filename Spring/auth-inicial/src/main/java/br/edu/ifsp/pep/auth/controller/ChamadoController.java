@@ -154,6 +154,27 @@ public class ChamadoController {
 
     }
 
+    @GetMapping("/prioridade/{prioridade}")
+    public ResponseEntity<List<Chamado>> listarPorPrioridade(
+        @PathVariable Prioridade prioridade
+    ) {
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User) {
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (user.getRole().equals(UserRole.ADMIN)) {
+                return ResponseEntity.ok(chamadoRepository.findByPrioridade(prioridade));
+            }
+            else if (user.getRole().equals(UserRole.USER)) {
+                if (prioridade.equals(Prioridade.BAIXA)) {
+                    return ResponseEntity.ok(chamadoRepository.findByPrioridade(prioridade));
+                }
+                else {
+                    return ResponseEntity.badRequest().build();
+                }
+            }
+        }
+        return null;
+    }
+
     public Chamado opToChamado(Optional<Chamado> ch) {
         Chamado c = new Chamado();
         c.setCodigo(ch.get().getCodigo());

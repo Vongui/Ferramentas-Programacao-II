@@ -6,12 +6,12 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>4.1.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>br.edu.ifsp.pep</groupId>
-	<artifactId>auth</artifactId>
+	<artifactId>prova03_feita</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>auth</name>
+	<name>prova03_feita</name>
 	<description/>
 	<url/>
 	<licenses>

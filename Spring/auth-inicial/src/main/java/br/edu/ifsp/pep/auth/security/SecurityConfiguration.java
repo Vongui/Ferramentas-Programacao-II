@@ -31,7 +31,7 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(request -> {
                     org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
                     config.setAllowedOrigins(java.util.List.of("*"));
-                    config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                    config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
                     config.setAllowedHeaders(java.util.List.of("*"));
                     return config;
                 }))
@@ -41,9 +41,10 @@ public class SecurityConfiguration {
                         authorize -> authorize
                             .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                             .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                            .requestMatchers(HttpMethod.POST, "/api/chamados").permitAll()
-                            .requestMatchers(HttpMethod.GET, "/api/chamados").hasAllRoles("ADMIN", "USER")
-                            .requestMatchers(HttpMethod.PATCH, "/api/chamados/{id}/status").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.POST, "/api/chamados").hasAnyRole("ADMIN", "USER")
+                            .requestMatchers(HttpMethod.GET, "/api/chamados").hasAnyRole("ADMIN", "USER")
+                            .requestMatchers(HttpMethod.GET, "/api/chamados/prioridade/{prioridade}").hasAnyRole("ADMIN", "USER")
+                            .requestMatchers(HttpMethod.PATCH, "/api/chamados/{id}/status").hasAnyRole("ADMIN", "USER")
                             .requestMatchers(HttpMethod.DELETE, "/api/chamados/{id}").hasRole("ADMIN")
                             .anyRequest().authenticated())
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
@@ -51,7 +52,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
